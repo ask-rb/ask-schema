@@ -24,6 +24,26 @@ and `ask-llm-providers` are built and stable. The ecosystem currently depends on
 - This is the reference implementation. The schema DSL is already standalone with zero deps.
 - The ask-rb version is a namespace repackage (ruby_llm-schema → ask-schema) with possible API refinements.
 
+### Full ruby_llm-schema breakdown (must port all of this):
+
+| Module | Lines | What it does |
+|---|---|---|
+| schema.rb | 99 | Main class. DSL inheritance, properties, required_properties, definitions, validate!, valid?, strict |
+| dsl.rb | 19 | Assembles all DSL modules |
+| dsl/schema_builders.rb | 196 | **Core.** string_schema, number_schema, integer_schema, boolean_schema, null_schema, object_schema, array_schema, any_of_schema, one_of_schema |
+| dsl/primitive_types.rb | 29 | string(name), number(name), integer(name), boolean(name), null(name) — DSL wrappers |
+| dsl/complex_types.rb | 32 | object(name), array(name), any_of(name), one_of(name), enum(name), const(name) |
+| dsl/conditionals.rb | 169 | Complex: if_then, if_then_else, dependent/required, dependent/schemas, conditions builder |
+| dsl/utilities.rb | 63 | define (named sub-schemas), reference ($ref), merge_conditions, helpers |
+| json_output.rb | 36 | to_json_schema — final output with $defs, strict, additionalProperties |
+| validator.rb | 93 | Circular reference detection via DFS topology sort |
+| errors.rb | 30 | Error types |
+| helpers.rb | 10 | Stub |
+
+**Total: ~700 lines across 12 files. Zero dependencies.**
+Port every one. No shortcuts — each module serves a specific purpose and skipping any
+will produce a subpar schema gem that cannot replace ruby_llm-schema.
+
 ### 2. Define gem scaffold
 - `lib/ask-schema.rb` — entry point
 - `lib/ask/schema.rb` — main module
