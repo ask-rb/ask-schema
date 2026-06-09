@@ -104,7 +104,7 @@ Key reference:
 - [ ] CHANGELOG.md exists with v0.1.0 entry
 - [ ] All code committed and pushed to github.com/ask-rb/ask-schema
 - [ ] Gem builds without errors: `gem build ask-schema.gemspec`
-- [ ] Gem released as a private gem
+- [ ] Gem released on RubyGems
 - [ ] A consumer can install, require, and use `Ask::Schema.define` with no errors
 
 ## Development Workflow
