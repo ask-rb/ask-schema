@@ -1,3 +1,7 @@
+## [0.1.1] - 2026-06-25
+
+### Changed
+- Robustness suite (11 tests): empty schemas, edge cases, schema isolation. Infrastructure: rubocop, overcommit, bin/setup, CI matrix, gemspec test.
 # Changelog
 
 ## [0.1.0] - 2026-06-21
